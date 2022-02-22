@@ -55,15 +55,15 @@ function renderImgs(){
 
   option1.src = allItems[productOne].src;
   option1.alt = allItems[productOne].name;
-  allItems[productOne].views++;
+  allItems[productOne].view++;
 
   option2.src = allItems[productTwo].src;
   option2.alt = allItems[productTwo].name;
-  allItems[productTwo].views++;
+  allItems[productTwo].view++;
 
   option3.src = allItems[productThree].src;
   option3.alt = allItems[productThree].name;
-  allItems[productThree].views++;
+  allItems[productThree].view++;
 }
 
 renderImgs();
@@ -87,7 +87,7 @@ function handleClick(event){
   }
 }
 
-function handleShowResults(event){
+function handleShowResults(){
 
   if(attempts === 0){
     for(let i = 0; i < allItems.length; i++){
