@@ -30,7 +30,6 @@ new catalog('cthulhu');
 new catalog('dog-duck');
 new catalog('dragon');
 new catalog('pen');
-new catalog('pen');
 new catalog('pet-sweep');
 new catalog('scissors');
 new catalog('shark');
@@ -93,7 +92,7 @@ function handleShowResults(event){
   if(attempts === 0){
     for(let i = 0; i < allItems.length; i++){
       let li = document.createElement('li');
-      li.textContent = `${allItems[i].name} was viewed ${allItems[i].views} times, and was voted for ${allItems[i].clicks} times.`;
+      li.textContent = `${allItems[i].name} was viewed ${allItems[i].view} times, and was voted for ${allItems[i].clicks} times.`;
       results.appendChild(li);
     }
   }
