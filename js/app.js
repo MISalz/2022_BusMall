@@ -1,9 +1,9 @@
 'use strict';
 
-let attempts = 5;
+let attempts = 25;
 let allItems = [];
 
-let content = document.getElementById('containers');
+let content = document.getElementById('container');
 let option1 = document.getElementById('bm1');
 let option2 = document.getElementById('bm2');
 let option3 = document.getElementById('bm3');
@@ -19,54 +19,51 @@ function catalog(name, fileExtention = 'jpg'){
   allItems.push(this);
 }
 
-new item('bag');
-new item('banana');
-new item('bathroom');
-new item('boots');
-new item('breakfast');
-new item('bubblegum');
-new item('chair');
-new item('cthulhu');
-new item('dog-duck');
-new item('dragon');
-new item('pen');
-new item('pen');
-new item('pet-sweep');
-new item('scissors');
-new item('shark');
-new item('sweep', 'png');
-new item('tauntaun');
-new item('unicorn');
-new item('water-can');
-new item('wine-glass');
+new catalog('bag');
+new catalog('banana');
+new catalog('bathroom');
+new catalog('boots');
+new catalog('breakfast');
+new catalog('bubblegum');
+new catalog('chair');
+new catalog('cthulhu');
+new catalog('dog-duck');
+new catalog('dragon');
+new catalog('pen');
+new catalog('pet-sweep');
+new catalog('scissors');
+new catalog('shark');
+new catalog('sweep', 'png');
+new catalog('tauntaun');
+new catalog('unicorn');
+new catalog('water-can');
+new catalog('wine-glass');
 
 function randomizer(){
-  return Math.floor(Math.random() * catalog.length);
+  return Math.floor(Math.random() * allItems.length);
 }
 
 function renderImgs(){
-  let productOne = getRandomIndex();
-  let productTwo = getRandomIndex();
-  let productThree = getRandomIndex();
+  let productOne = randomizer();
+  let productTwo = randomizer();
+  let productThree = randomizer();
 
-
-
-  while (productOne === productTwo === productThree){
-    productTwo = getRandomIndex();
-    productThree = getRandomIndex();
+  while (productOne === productTwo || productTwo === productThree || productThree === productOne){
+    productTwo = randomizer();
+    productThree = randomizer();
   }
 
-  imgOne.src = allItems[productOne].src;
-  imgOne.alt = allItems[productOne].name;
-  allItems[productOne].views++;
+  option1.src = allItems[productOne].src;
+  option1.alt = allItems[productOne].name;
+  allItems[productOne].view++;
 
-  imgTwo.src = allItems[productTwo].src;
-  imgTwo.alt = allItems[productTwo].name;
-  allItems[productTwo].views++;
+  option2.src = allItems[productTwo].src;
+  option2.alt = allItems[productTwo].name;
+  allItems[productTwo].view++;
 
-  imgThree.src = allItems[productThree].src;
-  imgThree.alt = allItems[productThree].name;
-  allItems[productThree].views++;
+  option3.src = allItems[productThree].src;
+  option3.alt = allItems[productThree].name;
+  allItems[productThree].view++;
 }
 
 renderImgs();
@@ -77,25 +74,25 @@ function handleClick(event){
 
   let imgClicked = event.target.alt;
 
-  for (let i = 0; i < allItems.length; i++){
-    if (imgClicked === allItems[i].name) {
+  for(let i = 0; i < allItems.length; i++){
+    if(imgClicked === allItems[i].name) {
       allItems[i].clicks++;
     }
   }
 
   renderImgs();
 
-  if (attempts === 0){
+  if(attempts === 0){
     content.removeEventListener('click', handleClick);
   }
 }
 
-function handleShowResults(event){
+function handleShowResults(){
 
-  if (attempts === 0){
-    for (let i = 0; i < allItems.length; i++){
+  if(attempts === 0){
+    for(let i = 0; i < allItems.length; i++){
       let li = document.createElement('li');
-      li.textContent = `${allItems[i].name} was viewed ${allItems[i].views} times, and was voted for ${allItems[i].clicks} times.`;
+      li.textContent = `${allItems[i].name} was viewed ${allItems[i].view} times, and was voted for ${allItems[i].clicks} times.`;
       results.appendChild(li);
     }
   }
