@@ -41,7 +41,7 @@ new catalog('water-can');
 new catalog('wine-glass');
 
 function randomizer(){
-  return Math.floor(Math.random()* allItems.length);
+  return Math.floor(Math.random() * allItems.length);
 }
 
 function renderImgs(){
@@ -49,7 +49,7 @@ function renderImgs(){
   let productTwo = randomizer();
   let productThree = randomizer();
 
-  while (productOne === productTwo === productThree){
+  while (productOne === productTwo || productTwo === productThree || productThree === productOne){
     productTwo = randomizer();
     productThree = randomizer();
   }
