@@ -9,7 +9,7 @@ grid-template-columns: 200px 200px 200px;
   row-gap: 15px;
 }
 
-.bm0{
+#bm0{
   font-family: 'Times New Roman', Times, serif;
   background-color: teal;
   padding: 10%;
@@ -28,20 +28,20 @@ h2{
   text-align: left; 
   grid-column: 1 / span 3;
 }
-.bm1{
+#bm1{
   background-color: blueviolet;
   display: flex;
   grid-row: 3/3;
   justify-self: left;
   
 }
-.bm2{
+#bm2{
   background-color: blue;
   display: flex;
   grid-row: 3/3;
   justify-self: center;
 }
-.bm3{
+#bm3{
   background-color: green;
   display: flex;
   grid-row: 3/3;
