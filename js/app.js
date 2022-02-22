@@ -1,6 +1,6 @@
 'use strict';
 
-let attempts = 15;
+let attempts = 25;
 let allItems = [];
 
 let content = document.getElementById('container');
