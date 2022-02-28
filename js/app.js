@@ -10,6 +10,7 @@ let option3 = document.getElementById('bm3');
 let resultsContent = document.getElementById('resultsContainer');
 let resultsBtn = document.getElementById('results-btn');
 let results = document.getElementById('results');
+const ctx = document.getElementById('myChart').getContext('2d');
 
 
 function catalog(name, fileExtention = 'jpg') {
@@ -85,57 +86,94 @@ function handleClick(event) {
 
   if (attempts === 0) {
     content.removeEventListener('click', handleClick);
+    //calls my chart function once voting has ended
+    renderChart();
   }
 }
 
-function handleShowResults() {
+// function handleShowResults() {
 
-  if (attempts === 0) {
-    for (let i = 0; i < allItems.length; i++) {
-      let li = document.createElement('li');
-      li.textContent = `${allItems[i].name} was viewed ${allItems[i].view} times, and was voted for ${allItems[i].clicks} times.`;
-      results.appendChild(li);
-    }
+//   if (attempts === 0) {
+//     for (let i = 0; i < allItems.length; i++) {
+//       let li = document.createElement('li');
+//       li.textContent = `${allItems[i].name} was viewed ${allItems[i].view} times, and was voted for ${allItems[i].clicks} times.`;
+//       results.appendChild(li);
+//     }
+//   }
+// }
+
+function renderChart() {
+  // array for all names in chart
+  let items = []
+  let itemClicks = []
+  let itemViews = []
+  for (let i = 0; i < allItems.length; i++) {
+    items.push(allItems[i].name);
+    itemClicks.push(allItems[i].clicks);
+    itemViews.push(allItems[i].view);
   }
-}
+  
 
-content.addEventListener('click', handleClick);
-
-resultsBtn.addEventListener('click', handleShowResults);
-
-const ctx = document.getElementById('myChart').getContext('2d');
-
-const myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
+  let chartObject = {
+    type: 'bar',
+    data: {
+      labels: items,
+      datasets: [{
+        label: '# of Views',
+        data: itemViews,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      },
+      {
+        label: '# of Clicks',
+        data: itemClicks,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
-  }
-});
+  };
+
+  new Chart(ctx, chartObject);
+}
+content.addEventListener('click', handleClick);
+
+// resultsBtn.addEventListener('click', handleShowResults);
+
+
