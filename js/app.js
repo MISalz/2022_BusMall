@@ -88,6 +88,10 @@ function handleClick(event) {
     content.removeEventListener('click', handleClick);
     //calls my chart function once voting has ended
     renderChart();
+    
+    let stringfiedItems = JSON.stringify(allItems);
+    localStorage.setItem('itemPicks', stringfiedItems);
+
   }
 }
 
