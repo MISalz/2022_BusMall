@@ -88,12 +88,15 @@ function handleClick(event) {
     content.removeEventListener('click', handleClick);
     //calls my chart function once voting has ended
     renderChart();
-    
+    /////////local storage
     let stringfiedItems = JSON.stringify(allItems);
     localStorage.setItem('itemPicks', stringfiedItems);
 
   }
 }
+
+let locStorageItems = localStorage.getItem('itemPicks')
+console.log ('locStorageItems', locStorageItems)
 
 // function handleShowResults() {
 
