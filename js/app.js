@@ -7,11 +7,12 @@ let content = document.getElementById('container');
 let option1 = document.getElementById('bm1');
 let option2 = document.getElementById('bm2');
 let option3 = document.getElementById('bm3');
+let resultsContent = document.getElementById('resultsContainer');
 let resultsBtn = document.getElementById('results-btn');
 let results = document.getElementById('results');
 
 
-function catalog(name, fileExtention = 'jpg'){
+function catalog(name, fileExtention = 'jpg') {
   this.name = name;
   this.view = 0;
   this.clicks = 0;
@@ -39,16 +40,16 @@ new catalog('unicorn');
 new catalog('water-can');
 new catalog('wine-glass');
 
-function randomizer(){
+function randomizer() {
   return Math.floor(Math.random() * allItems.length);
 }
 
-function renderImgs(){
+function renderImgs() {
   let productOne = randomizer();
   let productTwo = randomizer();
   let productThree = randomizer();
 
-  while (productOne === productTwo || productTwo === productThree || productThree === productOne){
+  while (productOne === productTwo || productTwo === productThree || productThree === productOne) {
     productTwo = randomizer();
     productThree = randomizer();
   }
@@ -69,28 +70,28 @@ function renderImgs(){
 renderImgs();
 
 
-function handleClick(event){
+function handleClick(event) {
   attempts--;
 
   let imgClicked = event.target.alt;
 
-  for(let i = 0; i < allItems.length; i++){
-    if(imgClicked === allItems[i].name) {
+  for (let i = 0; i < allItems.length; i++) {
+    if (imgClicked === allItems[i].name) {
       allItems[i].clicks++;
     }
   }
 
   renderImgs();
 
-  if(attempts === 0){
+  if (attempts === 0) {
     content.removeEventListener('click', handleClick);
   }
 }
 
-function handleShowResults(){
+function handleShowResults() {
 
-  if(attempts === 0){
-    for(let i = 0; i < allItems.length; i++){
+  if (attempts === 0) {
+    for (let i = 0; i < allItems.length; i++) {
       let li = document.createElement('li');
       li.textContent = `${allItems[i].name} was viewed ${allItems[i].view} times, and was voted for ${allItems[i].clicks} times.`;
       results.appendChild(li);
@@ -101,3 +102,40 @@ function handleShowResults(){
 content.addEventListener('click', handleClick);
 
 resultsBtn.addEventListener('click', handleShowResults);
+
+const ctx = document.getElementById('myChart').getContext('2d');
+
+const myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
